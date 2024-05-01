@@ -8,3 +8,7 @@ sh Script for Final Project:
 SPAdes steps:
 
 nohup spades.py -1 69_*R1* -2 69_*R2* -s unpaired-69_*R1* -s -s unpaired-69_*R1* -o spades_assembly_default -t 24 @
+
+Busco:
+download conda enviroment
+busco -i contigs.fasta -m genome -o busco-results -l bacteria
