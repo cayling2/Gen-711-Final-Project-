@@ -15,3 +15,6 @@ busco -i contigs.fasta -m genome -o busco-results -l bacteria
 
 Prokka:
 nohup prokka contigs.fasta --outdir prokka_output --cpus 24 --mincontiglen 200 &
+
+grep -o "product=.*" prokka_output/PROKKA_*.gff | sed 's/product=//g' | sort | uniq -c | sort -nr > protein_abundances.txt
+
