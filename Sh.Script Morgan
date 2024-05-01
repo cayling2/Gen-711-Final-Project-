@@ -12,3 +12,6 @@ nohup spades.py -1 69_*R1* -2 69_*R2* -s unpaired-69_*R1* -s -s unpaired-69_*R1*
 Busco:
 download conda enviroment
 busco -i contigs.fasta -m genome -o busco-results -l bacteria
+
+Prokka:
+nohup prokka contigs.fasta --outdir prokka_output --cpus 24 --mincontiglen 200 &
