@@ -153,6 +153,9 @@ R2
   ![plot](images/Caylin%20Blobtool%201-1.png)
   
   ![plot](images/Caylin%20Blobtool%201-2.png)
+
+
+After Filtering 
   
   ![plot](images/Caylin%20Blobtool%202-1.png)
   
@@ -160,9 +163,33 @@ R2
   </details>
   <details>
     <summary>Graham</summary>
+
+  
+  ![plot](images/Graham%20Blobtool%201-1.png)
+  
+  ![plot](images/Graham%20Blobtool%201-2.png)
+
+
+After Filtering 
+  
+  ![plot](images/Graham%20Blobtool%202-1.png)
+  
+  ![plot](images/Graham%20Blobtool%202-2.png)
   </details>
   <details>
     <summary>Ethan</summary>
+
+  
+  ![plot](images/Ethan%20Blobtool%201-1.png)
+  
+  ![plot](images/Ethan%20Blobtool%201-2.png)
+
+
+After Filtering 
+  
+  ![plot](images/Ethan%20Blobtool%202-1.png)
+  
+  ![plot](images/Ethan%20Blobtool%202-2.png)
   </details>
   
 </details>  
