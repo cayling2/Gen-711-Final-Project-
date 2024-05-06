@@ -7,12 +7,12 @@ Final Project for Gen 711 Class
 <details>
   <summary>Read Quality</summary>
 - Fastqc was run on the samples to summarize read quality and base assessment in HTML format<br />
-- The html files were transferred using Powershell and the several figures were observed <br />
+- The HTML files were transferred using Powershell and several figures were observed <br />
 </details>
 
 <details>
   <summary>Trimming</summary>
-  - Trimmomatic was run on the samples to trim off low quality reads and adapters<br />
+  - Trimmomatic was run on the samples to trim off low-quality reads and adapters<br />
   - Fastqc was run on the trimmed data to assess read quality <br />
 </details>
 
@@ -29,7 +29,34 @@ Final Project for Gen 711 Class
 
 <details>
   <summary>Genome Annotation</summary>
-  - PROKKA 
+  - PROKKA is run to annotate the genome <br />
+</details>
+
+<details>
+  <summary>Organism Identification</summary>
+  - 16s sequence was extracted from the PROKKA output for BLAST <br />
+  - BLAST was used to identify the most closely related genome to the sample to attempt to identify the organism <br />
+  - The 16s sequence was BLASTed against the contigs generated from SPAdes <br />
+</details>
+
+<details>
+  <summary>Read Mapping</summary>
+  - The fasta file is run through bwa mem to convert it to a SAM file using the forward and reverse reads of the genome <br />
+  - samtools was used to construct a coverage table of the SAM files <br />
+</details>
+
+<details>
+  <summary>Non-Target Contig Removal</summary>
+  - blobtools was used to visualize the genome assembly using the contigs file, BLAST hits file, and the SAM file <br />
+  - The graph was generated as a png and downloaded to be observed <br />
+</details>
+
+<details>
+  <summary>Filter Genome Assembly</summary>
+  - The blobtools tables were filtered by coverage and length <br />
+  - A list of contigs we wanted to keep was constructed <br />
+  - The assembly was filtered based on the list of contigs <br />
+  - Then the final contigs are BLASTed against UNIvec
 </details>
       
 </details>
