@@ -110,5 +110,21 @@ R2
 </details>
 
 </details>
+
+<details>
+  <summary>Quast</summary>
+
+  <details>
+    <summary>Caylin</summary>
+  </details>
+
+  <details>
+    <summary>Graham</summary>
+  </details>
+
+  <details>
+    <summary>Ethan</summary>
+  </details>
+</details>
   
 </details>
