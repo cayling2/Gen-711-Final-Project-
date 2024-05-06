@@ -56,7 +56,14 @@ Final Project for Gen 711 Class
   - The blobtools tables were filtered by coverage and length <br />
   - A list of contigs we wanted to keep was constructed <br />
   - The assembly was filtered based on the list of contigs <br />
-  - Then the final contigs are BLASTed against UNIvec
+  - Then the final contigs are BLASTed against UNIvec to ensure no contamination is found <br />
+</details>
+
+<details>
+  <summary>For Contamination</summary>
+  - Take out sequences that came up when the final contigs were BLASTed against UNIvec <br />
+  - Go back to QUAST and run down the methods again using BUSCO, PROKKA, BLAST, bwa mem, samtools, and blobtools <br />
+  - Once the new final list of contigs has gone through the methods again make sure to BLAST against UNIvec to make sure there is no contamination <br />
 </details>
       
 </details>
