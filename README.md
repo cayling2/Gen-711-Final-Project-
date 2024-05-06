@@ -149,6 +149,14 @@ R2
   <summary>Blobtools</summary>
   <details>
     <summary>Caylin</summary>
+
+  ![plot](images/Caylin%20Blobtool%201-1.png)
+  
+  ![plot](images/Caylin%20Blobtool%201-2.png)
+  
+  ![plot](images/Caylin%20Blobtool%202-1.png)
+  
+  ![plot](images/Caylin%20Blobtool%202-2.png)
   </details>
   <details>
     <summary>Graham</summary>
