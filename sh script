@@ -1,4 +1,6 @@
-Workflow of Final Project Gen 711 (Caylin Grove, Ethan Morgan, and Graham Collinsworth)
+#! /bin/bash
+
+#Workflow of Final Project Gen 711 (Caylin Grove, Ethan Morgan, and Graham Collinsworth)
 
 
 mkdir -p ~/final_project
