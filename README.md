@@ -43,11 +43,16 @@ Final Project for Gen 711 Class
 <details>
   <summary>Fastqc</summary>
 
+<details>
+  <summary>Caylin Fastqc untrimmed</summary>
 ![plot](images/Caylin%20R1-1.png)
-Caylin R1 untrimmed
+R1
 
 ![plot](images/Caylin%20R2-1.png)
-Caylin R2 untrimmed
+R2
+
+</details>
+
 </details>
   
 </details>
