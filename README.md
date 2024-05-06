@@ -17,14 +17,19 @@ Final Project for Gen 711 Class
 </details>
 
   <details>
-    <summary>Genome Assembly<summary>
-      - Genome was put together using SPAdes using the forward, reverse, and unpaired reads <br />
+    <summary>Genome Assembly</summary>
+      - Genome was put together with SPAdes using the forward, reverse, and unpaired reads <br />
   </details>
 
 <details>
   <summary>Genome Assesment</summary>
   - QUAST was used to assess how well the genome was put together <br />
-  - BUSCO was used 
+  - BUSCO was used to determine how complete the genome is using highly conserved genes (OrthoDB) <br />
+</details>
+
+<details>
+  <summary>Genome Annotation</summary>
+  - PROKKA 
 </details>
       
 </details>
