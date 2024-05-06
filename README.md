@@ -44,7 +44,10 @@ Final Project for Gen 711 Class
   <summary>Fastqc</summary>
 
 ![plot](images/Caylin%20R1-1.png)
+Caylin R1 untrimmed
 
+![plot](images/Caylin%20R2-1.png)
+Caylin R2 untrimmed
 </details>
   
 </details>
