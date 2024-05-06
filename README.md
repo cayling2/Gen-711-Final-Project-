@@ -117,19 +117,31 @@ R2
   <details>
     <summary>Caylin</summary>
 
-    ![plot](images/Caylin%20Quast-1.png)
+  ![plot](images/Caylin%20Quast-1.png)
     before
 
-    ![plot](images/Caylin%20Quast-2.png)
+  ![plot](images/Caylin%20Quast-2.png)
     after
   </details>
 
   <details>
     <summary>Graham</summary>
+
+  ![plot](images/Graham%20Quast-1.png)
+    before
+
+  ![plot](images/Graham%20Quast-2.png)
+    after
   </details>
 
   <details>
     <summary>Ethan</summary>
+
+  ![plot](images/Ethan%20Quast.png)
+    before
+
+  ![plot](images/Ethan%20Quast-2.png)
+    after
   </details>
 </details>
   
