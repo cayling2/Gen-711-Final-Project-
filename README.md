@@ -43,7 +43,7 @@ Final Project for Gen 711 Class
 <details>
   <summary>Fastqc</summary>
 
-![plot](images/Caylin R1-1.png)
+![plot](images/Caylin\R1-1.png)
 
 </details>
   
