@@ -76,6 +76,39 @@ R2
 
 </details>
 
+<details>
+  <summary>Caylin Fastqc trimmed</summary>
+
+![plot](images/Caylin%20R1-2)
+R1
+
+![plot](images/Caylin%20R2-2)
+R2
+
+</details>
+
+<details>
+  <summary>Graham Fastqc trimmed</summary>
+
+![plot](images/Graham%20R1-2)
+R1
+
+![plot](images/Graham%20R2-2)
+R2
+
+</details>
+
+<details>
+  <summary>Ethan Fastqc trimmed</summary>
+
+![plot](images/Ethan%20R1-2)
+R1
+
+![plot](images/Ethan%20R2-2)
+R2
+
+</details>
+
 </details>
   
 </details>
