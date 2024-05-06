@@ -1,1 +1,306 @@
-SH script file for final project
+Workflow of Final Project Gen 711 (Caylin Grove, Ethan Morgan, and Graham Collinsworth)
+
+
+mkdir -p ~/final_project
+cd final_project
+mkdir -p Raw_data
+cd /tmp/gen711_project_data/genome-assembly-fqs
+cp 2_s26_L001_R1_001.fastq.gz ~/final_project_Raw_data/
+cp 2 s26_L001_R2_001.fastq.gz ~/final_project/Raw_data
+
+conda activate genomics
+
+
+#total bp in data
+zgrep -c '^@' 2_*R1*
+#1497347
+zcat 2_*R1* | wc -l
+#5989388
+echo 5989388/4 | bc
+#1497347
+
+echo "1497347*250*2" | bc
+#748673500
+
+#Total Coverage
+echo "748673500/7000000" | bc
+#106
+
+
+#Fastqc
+mkdir fastqc_raw_reads
+fastqc 2_*R1* 2_*R2* -o fastqc_raw_reads
+
+
+#Getting HTML Files 
+#go to powershell
+sftp cmg1164@ron.sr.unh.edu
+#put in password
+cd final_project/Raw_data/fastqc_raw_reads
+lcd desktop
+get *html
+
+
+#Trimmomatic 
+trim_scriptV2.sh 2_*R1* 2_*R2*
+
+
+#Run Fastqc again
+mkdir fasqc_trimmed_reads
+fastqc 2_*R1* 2_*R2* -o fastqc_trimmed_reads
+
+
+#Genome Assembly
+
+nohup spades.py -1 2_*R1* -2 2_*R2* -s unpaired-2_*R1* -s unpaired-2_*R2* -o spades_assembly_default -t 24 &
+#974614
+
+less -S speades_assembly_default/contigs.fasta | head
+#CCCGCTGGACGGCGTCCCGCCGTTCGTCTGGCACGGCTCCATCCGCTCCCCGGAGATCGC                                  │
+#CGAGCAGGCCGCGTACTACGGCGACGGCTTCTTCCACAACAACATCTTCTGGCCCGCCGA                                  │echo "1497347*250*2" | bc
+#CCACACCAAGCGGATGATCGAGCTGTACCGCGCGCGCTACGCCCACCACGGGCACGGCAC                                  │#748673500
+#CCCGGAGCAGGCGATCGTCGGCCTGGGCGGCCAGGTGTTCATGCGGAAGAACTCCCAGGA                                  │
+#CGCGGTAAGGGAGTTCCGCCCGTACTTCGACAACGCCCCGGTCTACGGCCACGGACCCTC                                  │#Total Coverage
+#GCTGGAGGACTTCACCGAGCAGACCCCGCTCACCGTGGGCTCCCCGCAGCAGGTGATCGA                                  │echo "748673500/7000000" | bc
+#GAAGACGCTCTCCTTCCGCGAGTACGCCGGCGACTACCAGCGCCAGCTGTTCCTGATGGA                                  │#106
+#CCACGCGGGACTGCCGCTGAAGACCGTCCTGGAACAGCTCGACATGCTCGGCGAGGAGGT                                  │
+#CGTGCCCGTGCTGCGCGAGGAGTTCGCCAAGGACCGTCCGGCGGACGTGCCGGACGCCCC 
+
+grep '>' spades_assembly_default/contigs.fasta | head
+#>NODE_1_length_204992_cov_32.481293                                                           │#Trimmomatic
+>NODE_2_length_203426_cov_33.614705                                                           │trim_scriptV2.sh 2_*R1* 2_*R2*
+>NODE_3_length_177775_cov_32.084943                                                           │
+>NODE_4_length_177450_cov_33.355070                                                           │
+>NODE_5_length_176389_cov_32.877007                                                           │#Run Fastqc again
+>NODE_6_length_171046_cov_33.335557                                                           │mkdir fasqc_trimmed_reads
+>NODE_7_length_164478_cov_32.509349                                                           │fastqc 2_*R1* 2_*R2* -o fastqc_trimmed_reads
+>NODE_8_length_160175_cov_31.360348                                                           │
+>NODE_9_length_158603_cov_33.783469                                                           │
+>NODE_10_length_154978_cov_33.316427   
+
+grep -c '>' spades_assembly_default/contigs.fasta
+#2399
+
+
+#Fasta Format
+
+mkdir spades
+mv spades_assembly_default/ spades/
+mv contigs.fasta spades.log ../
+pwd
+rm -r *
+rmdir spades_assembly_default 
+
+#Genome Assesment
+
+quast --help
+quast.py contigs.fasta -o quast_results
+nano report.txt
+
+#BUSCO
+conda install bioconda::busco
+conda activate busco
+busco --list-datasets
+busco -i contigs.fasta -m genome -o busco results -l bacteria
+
+less -S busco_results/short_summary.specific.bacteria _odb10.busco_results.txt
+less -S busco_results/run_bacteria_odb10/full_table.tsv
+ls busco_results/run_bacteria_odb10/busco_sequences/
+
+#PROKKA
+
+conda activate genomics
+nohup prokka contigs.fasta --outdir prokka_output --cpus 24 --mincontiglen 200 &
+
+#was not working
+prokka contigs.fasta --outdir prokka_output --cpus 24 --mincontiglen 200
+
+grep -o "products=.*" prokka_output/PROKKA_*.gff | sed 's/product=//g' | sort |uniq -c | sort -nr > protein_abundances.txt
+
+
+#Organism Identification
+
+grep 16s prokka_output/*.ffn
+#>LMGMMJFK_02490 16S/23S rRNA (cytidine-2'-O)-methyltransferase TlyA                           │grep -c '>' spades_assembly_default/contigs.fasta
+#>LMGMMJFK_04730 Putative pre-16S rRNA nuclease                                                │#2399
+##>LMGMMJFK_07956 16S ribosomal RNA >LMGMMJFK_02490 16S/23S rRNA (cytidine-2'-O)-methyltransferase TlyA                           │grep -c '>' spades_assembly_default/contigs.fasta
+#>LMGMMJFK_04730 Putative pre-16S rRNA nuclease                                                │#2399
+#>LMGMMJFK_07956 16S ribosomal RNA 
+
+extract_sequences "16S ribosomal RNA" prokka_output/PROKKA_*.ffn > 16S_sequence.fastaextract_sequences "16S ribosomal RNA" prokka_output/PROKKA_*.ffn > 16S_sequence.fasta
+#ACGGAGAGTTTGATCCTGGCTCAGGACGAACGCTGGCGGCGTGCTTAACACATGCAAGTC                                  │mv spades_assembly_default/ spades/
+#GAACGATGAACCTCCTTCGGGAGGGGATTAGTGGCGAACGGGTGAGTAACACGTGGGCAA                                  │mv contigs.fasta spades.log ../
+#TCTGCCCTGCACTCTGGGACAAGCCCTGGAAACGGGGTCTAATACCGGATATGAGCCTGG                                  │pwd
+#GAGGCATCTCCCGGGTTGTAAAGCTCCGGCGGTGCAGGATGAGCCCGCGGCCTATCAGCT                                  │rm -r *
+#TGTTGGTGAGGTAACGGCTCACCAAGGCGACGACGGGTAGCCGGCCTGAGAGGGCGACCG                                  │rmdir spades_assembly_default
+#GCCACACTGGGACTGAGACACGGCCCAGACTCCTACGGGAGGCAGCAGTGGGGAATATTG                                  │
+#CACAATGGGCGAAAGCCTGATGCAGCGACGCCGCGTGAGGGATGACGGCCTTCGGGTTGT                                  │#Genome Assesment
+#AAACCTCTTTCAGCAGGGAAGAAGCGAGAGTGACGGTACCTGCAGAAGAAGCGCCGGCTA                                  │
+#ACTACGTGCCAGCAGCCGCGGTAATACGTAGGGCGCAAGCGTTGTCCGGAATTATTGGGC                                  │quast --help
+#GTAAAGAGCTCGTAGGCGGCTTGTCACGTCGGTTGTGAAAGCCCGGGGCTTAACCCCGGG                                  │quast.py contigs.fasta -o quast_results
+#TCTGCAGTCGATACGGGCAGGCTAGAGTTCGGTAGGGGAGATCGGAATTCCTGGTGTAGC                                  │nano report.txt
+#GGTGAAATGCGCAGATATCAGGAGGAACACCGGTGGCGAAGGCGGATCTCTGGGCCGATA                                  │
+#CTGACGCTGAGGAGCGAAAGCGTGGGGAGCGAACAGGATTAGATACCCTGGTAGTCCACG                                  │#BUSCO
+#CCGTAAACGGTGGGCACTAGGTGTGGGCAACATTCCACGTTGTCCGTGCCGCAGCTAACG                                  │conda install bioconda::busco
+#CATTAAGTGCCCCGCCTGGGGAGTACGGCCGCAAGGCTAAAACTCAAAGGAATTGACGGG                                  │conda activate busco
+#GGCCCGCACAAGCGGCGGAGCATGTGGCTTAATTCGACGCAACGCGAAGAACCTTACCAA                                  │busco --list-datasets
+#GGCTTGACATACACCGGAAAGCATCAGAGATGGTGCCCCCCTTGTGGTCGGTGTACAGGT                                  │busco -i contigs.fasta -m genome -o busco results -l bacteria
+#GGTGCATGGCTGTCGTCAGCTCGTGTCGTGAGATGTTGGGTTAAGTCCCGCAACGAGCGC                                  │
+#AACCCTTGTCCCGTGTTGCCAGCAGGCCCTTGTGGTGCTGGGGACTCACGGGAGACCGCC                                  │less -S busco_results/short_summary.specific.bacteria _odb10.busco_results.txt
+#GGGGTCAACTCGGAGGAAGGTGGGGACGACGTCAAGTCATCATGCCCCTTATGTCTTGGG                                  │less -S busco_results/run_bacteria_odb10/full_table.tsv
+#CTGCACACGTGCTACAATGGCCGGTACAAAGAGCTGCGATACCGTGAGGTGGAGCGAATC                                  │ls busco_results/run_bacteria_odb10/busco_sequences/
+#TCAAAAAGCCGGTCTCAGTTCGGATTGGGGTCTGCAACTCGACCCCATGAAGTCGGAGTC                                  │
+#GCTAGTAATCGCAGATCAGCATTGCTGCGGTGAATACGTTCCCGGGCCTTGTACACACCG                                  │#PROKKA
+#CCCGTCACGTCACGAAAGTCGGTAACACCCGAAGCCGGTGGCCCAACCCCTTGTGGGAGG                                  │
+#GAGCTGTCGAAGGTGGGACTGGCGATTGGGACGAAGTCGTAACAAGGTAGCCGTACCGGA                                  │conda activate genomics
+#AGGTGCGGCTGGATCACCTCCTTT   
+
+less -S 16S_sequence.fasta
+
+#BLAST
+
+makeblastdb -in contigs.fasta -dbtype nucl -out contigs_db 
+
+blastn -query 16S_sequence.fasta -db contigs_db -out 16S_vs_contigs_6.tsv -outfmt 6
+
+nano 16S_vs_contigs_6.tsv
+ 
+blob_blast.sh contigs.fasta
+
+
+#Read Mapping
+
+bwa index contigs.fasta
+bwa mem -t 24 contigs.fasta ../2_*R1*.gz ../2_*R2*.gz > raw_mapped.sam 
+less -S raw_mapped.sam
+
+samtools view -@ 24 -Sb  raw_mapped.sam  | samtools sort -@ 24 - sorted_mapped
+samtools flagstat sorted_mapped.bam
+samtools index sorted_mapped.bam
+
+bedtools genomecov -ibam sorted_mapped.bam > coverage.out
+gen_input_table.py  --isbedfiles contigs.fasta coverage.out >  coverage_table.tsv
+
+#Nontarget Contig Removal
+
+blobtools create -i contigs.fasta -b sorted_mapped.bam -t contigs.fasta.vs.nt.cul5.1e5.megablast.out -o blob_out
+blobtools view -i blob_out.blobDB.json -r all -o blob_taxonomy
+grep -v '##' blob_taxonomy.blob_out.blobDB.table.txt
+blobtools plot -i blob_out.blobDB.json -r genus
+
+
+#Filter the genome assembly
+
+mkdir -p ~/final_projects/mdibl-t3-2018-WGS/filtered_assembly
+cp ~/final_project/Raw_data/trimmed-reads/spades/blob_taxonomy.blob_out.blobDB.table.txt ~/final_project/mdibl-t3-2018-WGS
+
+grep -v '#' blob_taxonomy.blob_out.blobDB.table.txt | awk -F'\t' '$2 > 500' | less
+grep -v '#' blob_taxonomy.blob_out.blobDB.table.txt | awk -F'\t' '$2 < 500' | less
+
+grep -v '#' blob_taxonomy.blob_out.blobDB.table.txt | awk -F'\t' '$2 > 500' | wc
+#647  15866  133379
+
+grep -v '#' blob_taxonomy.blob_out.blobDB.table.txt | awk -F'\t' '$2 < 500' | wc
+#1750  41972  325535
+
+grep -v '#' blob_taxonomy.blob_out.blobDB.table.txt | awk -F'\t' '$2 > 500' | awk -F'\t' '$5 > 5' | less
+grep -v '#' blob_taxonomy.blob_out.blobDB.table.txt | awk -F'\t' '$2 > 500' | awk -F'\t' '$5 < 5' | less
+
+grep -v '#' blob_taxonomy.blob_out.blobDB.table.txt | awk -F'\t' '$2 > 500' | awk -F'\t' '$5 < 5' | wc
+#349  8417  68168
+
+grep -v '#' blob_taxonomy.blob_out.blobDB.table.txt | awk -F'\t' '$2 > 500' | awk -F'\t' '$5 > 15' | less
+
+
+grep -v '##' blob_taxonomy.blob_out.blobDB.table.txt | awk -F'\t' '$2 > 500' | awk -F'\t' '$5 > 20' | less
+
+grep -v '##' blob_taxonomy.blob_out.blobDB.table.txt | awk -F'\t' '$2 > 500' | awk -F'\t' '$5 > 20' | awk -F'\t' '{print $1}' > list_of_contigs_to_keep_len500_cov20.txt
+less -S list_of_contigs_to_keep_len500_cov20.txt
+
+filter_contigs_by_list.py ~/final_project/Raw_data/trimmed-reads/spades/contigs.fasta list_of_contigs_to_keep_len500_cov20.txt Streptomyces_A1277_filtered.fasta
+
+
+grep -f list_of_contigs_to_keep_len500_cov20.txt blob_taxonomy.blob_out.blobDB.table.txt | awk '{w = w + $2; e = e + $5 * $2;} END {print e/w}'
+# 74.6596
+
+wget "https://ftp.ncbi.nlm.nih.gov/pub/UniVec/UniVec"
+
+blastn -reward 1 -penalty -5 -gapopen 3 -gapextend 3 -dust yes -soft_masking true -evalue 700 -searchsp 1750000000000 -query Streptomyces_A1277_filtered.fasta -subject UniVec  -outfmt 6 -out genome_vs_univec.6
+
+#Remove Contaminates
+NODE_6_length_171046_cov_33.335557      gnl|uv|KU936034.1:2501-3718     91.282  195     17   >│
+NODE_6_length_171046_cov_33.335557      gnl|uv|KU936034.1:2501-3718     100.000 32      0    >│
+NODE_6_length_171046_cov_33.335557      gnl|uv|KU936037.1:1735-1833     94.203  69      4    >│
+NODE_25_length_100063_cov_33.429745     gnl|uv|FJ931533.1:7071-7787     91.971  274     22   >
+
+filter_contigs_by_list.py ~/final_project/Raw_data/spades/contigs.fasta list_of_contigs_to_keep_len500_cov20.txt Streptomyces_A1277_filtered.fasta
+
+grep -f list_of_contigs_to_keep.txt blob_taxonomy.blob_out.blobDB.table.txt | awk '{w = w + $2; e = e + $5 * $2;} END {print e/w}'
+# 74.6855
+
+blastn -reward 1 -penalty -5 -gapopen 3 -gapextend 3 -dust yes -soft_masking true -evalue 700 -searchsp 1750000000000 -query Streptomyces_A1277_filtered.fasta -subject UniVec  -outfmt 6 -out genome_vs_univec.6
+
+
+#ReRun Quast
+
+quast.py Streptomyces_A1277_filtered.fasta -o quast_results
+
+#ReRun BUSCO
+
+conda activate busco
+
+busco -i Steptomyces_a1277_filtered.fasta -m genome -o busco-results -l bacteria
+
+less -S busco-results/short_summary.specific.bacteria_odb10.busco-results.txt
+less -S busco-results/run_bacteria_odb10/full_table.tsv
+ls busco-results/run_bacteria_odb10/busco_sequences/
+
+conda activate genomics
+
+
+#ReRun PROKKA
+
+nohup prokka Streptomyces_A1277_filtered.fasta --outdir prokka_output --cpus 24 --mincontiglen 200 &
+
+ls prokka_output
+grep -o "product=.*" prokka_output/PROKKA_*.gff | sed 's/product=//g' | sort | uniq -c | sort -nr > protein_abundances.txt
+
+
+grep 16S prokka_output/*.ffn
+extract_sequences "16S ribosomal RNA" prokka_output/PROKKA_*.ffn > 16S_sequence.fasta
+less -S 16S_sequence.fasta
+
+#ReReadMapping
+
+
+bwa index Streptomyces_A1277_filtered.fasta
+bwa mem -t 24 Streptomyces_A1277_filtered.fasta ../Raw_data/2_*R1*.gz ../Raw_data/2_*R2*.gz > raw_mapped.sam
+less -S raw_mapped.sam
+
+samtools view -@ 24 -Sb  raw_mapped.sam  | samtools sort -@ 24 - sorted_mapped
+samtools flagstat sorted_mapped.bam
+
+
+samtools index sorted_mapped.bam
+bedtools genomecov -ibam sorted_mapped.bam > coverage.out
+
+gen_input_table.py  --isbedfiles Streptomyces_A1277_filtered.fasta coverage.out >  coverage_table.tsv
+
+
+#need to redo Blast
+
+makeblastdb -in Streptomyces_A1277_filtered.fasta -dbtype nucl -out contigs_db 
+blastn -query 16S_sequence.fasta -db contigs_db -out 16S_vs_contigs_6.tsv -outfmt 6
+
+blob_blast.sh Streptomyces_A1277_filtered.fasta
+
+
+#Blobtools
+
+blobtools create -i Streptomyces_A1277_filtered.fasta -b sorted_mapped.bam -t Streptomyces_A1277_filtered.fasta.vs.nt.cul5.1e5.megablast.out -o blob_out
+
+blobtools view -i blob_out.blobDB.json -r all -o blob_taxonomy
+grep -v '##' blob_taxonomy.blob_out.blobDB.table.txt
+
+blobtools plot -i blob_out.blobDB.json -r genus
+
