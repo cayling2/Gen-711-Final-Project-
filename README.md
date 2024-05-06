@@ -116,6 +116,12 @@ R2
 
   <details>
     <summary>Caylin</summary>
+
+    ![plot](images/Caylin%20Quast-1.png)
+    before
+
+    ![plot](images/Caylin%20Quast-2.png)
+    after
   </details>
 
   <details>
