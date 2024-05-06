@@ -65,6 +65,17 @@ R2
 
 </details>
 
+<details>
+  <summary>Ethan Fastqc untrimmed</summary>
+
+![plot](images/Ethan%20R1-1.png)
+R1
+
+![plot](images/Ethan%20R2-1.png)
+R2
+
+</details>
+
 </details>
   
 </details>
