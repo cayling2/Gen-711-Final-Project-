@@ -45,10 +45,22 @@ Final Project for Gen 711 Class
 
 <details>
   <summary>Caylin Fastqc untrimmed</summary>
+
 ![plot](images/Caylin%20R1-1.png)
 R1
 
 ![plot](images/Caylin%20R2-1.png)
+R2
+
+</details>
+
+<details>
+  <summary>Graham Fastqc untrimmed</summary>
+
+![plot](images/Graham%20R1-1.png)
+R1
+
+![plot](images/Graham%20R2-1.png)
 R2
 
 </details>
