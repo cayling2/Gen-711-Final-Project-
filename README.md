@@ -90,6 +90,7 @@ Final Project for Gen 711 Class
 <details>
   <summary>Fastqc</summary>
 
+-Raw reads Fastqc results
 <details>
   <summary>Caylin Fastqc untrimmed</summary>
 
@@ -122,7 +123,7 @@ R1
 R2
 
 </details>
-
+-Trimmed reads Fastqc results
 <details>
   <summary>Caylin Fastqc trimmed</summary>
 
@@ -160,7 +161,7 @@ R2
 
 <details>
   <summary>Quast</summary>
-
+-Quast data 
   <details>
     <summary>Caylin</summary>
 
@@ -194,6 +195,7 @@ R2
 
 <details>
   <summary>Blobtools</summary>
+  Identification of organism through blobtools
   <details>
     <summary>Caylin</summary>
 
