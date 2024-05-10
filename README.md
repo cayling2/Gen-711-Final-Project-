@@ -3,7 +3,7 @@ Final Project for Gen 711 Class
 
 <details>
   <summary>Background</summary>
-  The data and methods for this project were taken from https://github.com/Joseph7e/MDIBL-T3-WGS-Tutorial. The goal of the research was to study seaweed-eating microbes collected from MDIBL and Acadia National Park. The data was collected by Anthony Hay, Steven Weicksel, Dana-Lynn Koomoa-Lange, Leah Elliot, Melissa Chisholm, and Princess Rodriguez. The DNA was extracted and Illumina sequencing was used for downstream analysis. 
+  The data and methods for this project were taken from https://github.com/Joseph7e/MDIBL-T3-WGS-Tutorial. The goal of the research was to study seaweed-eating microbes collected from MDIBL, Acadia National Park. The data was collected by Anthony Hay, Steven Weicksel, Dana-Lynn Koomoa-Lange, Leah Elliot, Melissa Chisholm, and Princess Rodriguez. The DNA was extracted and Illumina sequencing was used for downstream analysis. 
 </details>
 
 <details>
