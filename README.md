@@ -241,5 +241,13 @@ After Filtering
   ![plot](images/Ethan%20Blobtool%202-2.png)
   </details>
   
-</details>  
+</details>
+
+<details>
+  <summary>PROKsee genome visualization</summary>
+
+  ![plot](images/Caylin_visualization.png)
+  ![plot](images/Ethan_visualization.png)
+  ![plot](images/Graham_visualization.png)
+</details>
 </details>
