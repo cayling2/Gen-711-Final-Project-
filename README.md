@@ -72,11 +72,11 @@ Final Project for Gen 711 Class
 </details>
 <details>
   <summary>Genome Visualization</summary>
-  - The PROKKA .gbk file from after filtering the genome was placed into a program called proksee
-  - Proksee gave a visualization of the genome 
+  - The PROKKA .gbk file from after filtering the genome was placed into a program called proksee <br />
+  - Proksee gave a visualization of the genome <br />
   - Grant JR, Enns E, Marinier E, Mandal A, Herman EK, Chen C, Graham M, Van Domselaar G, and Stothard P​
         Proksee: in-depth characterization and visualization of bacterial genomes​
-        Nucleic Acids Research, 2023, gkad326, https://doi.org/10.1093/nar/gkad326
+        Nucleic Acids Research, 2023, gkad326, https://doi.org/10.1093/nar/gkad326 <br />
 </details>
       
 </details>
