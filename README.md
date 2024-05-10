@@ -245,6 +245,7 @@ After Filtering
 
 <details>
   <summary>PROKsee genome visualization</summary>
+  Genome visualization made using PROKsee
 <details>
   <summary>Caylin</summary>
   
