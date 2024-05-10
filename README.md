@@ -3,7 +3,7 @@ Final Project for Gen 711 Class
 
 <details>
   <summary>Background</summary>
-  The data and methods for this project were taken from https://github.com/Joseph7e/MDIBL-T3-WGS-Tutorial. The goal of the research was to study seaweed-eating microbes  The data was collected by Anthony Hay, Steven Weicksel, Dana-Lynn Koomoa-Lange, Leah Elliot, Melissa Chisholm, Princess Rodriguez near MDIBL and Acadia National Park. 
+  The data and methods for this project were taken from https://github.com/Joseph7e/MDIBL-T3-WGS-Tutorial. The goal of the research was to study seaweed-eating microbes collected from MDIBL and Acadia National Park. The data was collected by Anthony Hay, Steven Weicksel, Dana-Lynn Koomoa-Lange, Leah Elliot, Melissa Chisholm, and Princess Rodriguez. The DNA was extracted and Illumina sequencing was used for downstream analysis. 
 </details>
 
 <details>
@@ -69,6 +69,14 @@ Final Project for Gen 711 Class
   - Take out sequences that came up when the final contigs were BLASTed against UNIvec <br />
   - Go back to QUAST and run down the methods again using BUSCO, PROKKA, BLAST, bwa mem, samtools, and blobtools <br />
   - Once the new final list of contigs has gone through the methods again make sure to BLAST against UNIvec to make sure there is no contamination <br />
+</details>
+<details>
+  <summary>Genome Visualization</summary>
+  - The PROKKA .gbk file from after filtering the genome was placed into a program called proksee
+  - Proksee gave a visualization of the genome 
+  - Grant JR, Enns E, Marinier E, Mandal A, Herman EK, Chen C, Graham M, Van Domselaar G, and Stothard P​
+        Proksee: in-depth characterization and visualization of bacterial genomes​
+        Nucleic Acids Research, 2023, gkad326, https://doi.org/10.1093/nar/gkad326
 </details>
       
 </details>
