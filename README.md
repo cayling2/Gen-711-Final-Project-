@@ -245,9 +245,20 @@ After Filtering
 
 <details>
   <summary>PROKsee genome visualization</summary>
-
+<details>
+  <summary>Caylin</summary>
+  
   ![plot](images/Caylin_visualization.png)
+</details>
+<details>
+  <summary>Ethan</summary>
+  
   ![plot](images/Ethan_visualization.png)
+</details>
+<details>
+  <summary>Graham</summary>
+  
   ![plot](images/Graham_visualization.png)
+  </details>
 </details>
 </details>
