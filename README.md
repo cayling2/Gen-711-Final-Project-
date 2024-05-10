@@ -90,7 +90,7 @@ Final Project for Gen 711 Class
 <details>
   <summary>Fastqc</summary>
 
--Raw reads Fastqc results
+-Quality of raw reads before trimming shows slightly poor quality
 <details>
   <summary>Caylin Fastqc untrimmed</summary>
 
@@ -123,7 +123,7 @@ R1
 R2
 
 </details>
--Trimmed reads Fastqc results
+-Qulaity of trimmed reads using trimmomatic shown to have improved.
 <details>
   <summary>Caylin Fastqc trimmed</summary>
 
@@ -161,7 +161,7 @@ R2
 
 <details>
   <summary>Quast</summary>
--Quast data 
+-Quast data showing contig lengths GC content and N50 data 
   <details>
     <summary>Caylin</summary>
 
@@ -195,7 +195,7 @@ R2
 
 <details>
   <summary>Blobtools</summary>
-  Identification of organism through blobtools
+  Identification of organism through blobtools showing both before and after filtering.
   <details>
     <summary>Caylin</summary>
 
