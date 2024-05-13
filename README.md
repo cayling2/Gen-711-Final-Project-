@@ -123,7 +123,7 @@ R1
 R2
 
 </details>
--Qulaity of trimmed reads using trimmomatic shown to have improved.
+-Quality of trimmed reads using trimmomatic shown to have improved.
 <details>
   <summary>Caylin Fastqc trimmed</summary>
 
